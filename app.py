@@ -56,6 +56,16 @@ def delete_cpu(cpu_id):
         flash('CPU was successfully deleted!')
         return redirect("/")
 
+@app.route('/update_cpu/<int:cpu_id>', methods=['GET','POST'])
+def update_cpu(cpu_id):
+    if request.method == 'POST': 
+        obj = ndeal_cpu.query.filter_by(cpu_id=cpu_id).first()
+        db.session.update(obj)
+        db.session.commit()
+        flash('CPU was successfully updated!')
+        return redirect("/")
+
+
     else: #if it's a GET request, send them to the home page
         return redirect("/")
 
